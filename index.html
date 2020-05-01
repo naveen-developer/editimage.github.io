@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <style type="text/css">
+    	body{
+    		background-color: #376b88;
+    		font-family: 'Josefin Sans', sans-serif;
+    	}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="mainheader">
+    	<div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-4" style="background-color:lavender;">
+
+                <h3 class="text-center my-5">Image Fileters</h3>
+                <form id="sliderform">
+                	<div class="d-flex justify-content-center">
+                    <div class="w-75">
+                        <p>Grayscale</p>
+                        <input type="range" class="custom-range" id="gs" min="" max="100" value="0">
+                    </div>
+
+                    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="w-75">
+                        <p>Blur</p>
+                        <input type="range" class="custom-range" id="bl" min="" max="100" value="0">
+                    </div>
+                    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="w-75">
+                        <p>Hue-Rotate</p>
+                        <input type="range" class="custom-range" id="hr" min="" max="100" value="0">
+                    </div>
+                    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="w-75">
+                        <p>Speia</p>
+                        <input type="range" class="custom-range" id="speia" min="" max="100" value="0">
+                    </div>
+                    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+                </div>
+                
+
+                <div class="text-center mt-4">
+                	<button type="reset" class="btn btn-dark">Reset</button>
+                </div>
+
+                </form>
+
+            </div>
+
+            <div class="col-lg-8" style="background-color:lavenderblush;">
+                <form id="myform">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="form-group w-100">
+                            <input type="text" class="form-control mt-3" placeholder="imageURL" id="onlineurl">
+                        </div>
+                        <button type="submit" class="btn btn-dark mx-4">imageURL</button>
+
+                    </div>
+                </form>
+                <div class="" style="height: 80vh;background-color: #20709287;">
+                    <figure style="height: 80vh;">
+                        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/3947/663947-h" class="rounded" alt="Cinque Terre" style="height: 100%; width: 100%;padding: 30px;" id="targetimage">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script type="text/javascript">
+        let myform = document.getElementById('myform');
+        let targetimage = document.getElementById('targetimage');
+        let inputrange = document.querySelectorAll('.custom-range');
+
+        myform.addEventListener('submit', function(e) {
+            let urlimage = document.getElementById('onlineurl');
+            let urlimageval = urlimage.value;         
+            
+            if(urlimageval.length)
+            {
+            	targetimage.setAttribute('src', urlimageval);
+            }
+            urlimage.value = '';
+            e.preventDefault();
+            console.log('done');
+            console.log(urlimageval);
+        });
+
+        for(let i=0;i<inputrange.length;i++)
+        {
+        	inputrange[i].addEventListener('input',editimage)
+        }
+
+        function editimage(){
+        	let gs = document.getElementById('gs');
+        	let bl = document.getElementById('bl');
+        	let hr = document.getElementById('hr');
+        	let sp = document.getElementById('sp');
+
+
+        	let Grayscale =  gs.value;
+			let Blur = bl.value;
+			let Huerotate = hr.value;
+			let Speia = speia.value;
+
+			targetimage.style.filter = 'grayscale('+Grayscale+'%) blur('+Blur+'px) hue-rotate('+Huerotate+'deg) sepia('+Speia+'%)';
+
+			let test = 'grayscale('+Grayscale+'%) blur('+Blur+'px) hue-rotate('+Huerotate+'deg) sepia('+Speia+'%)';
+
+			/*console.log(Grayscale);
+			console.log(Blur);
+			console.log(Huerotate);
+			console.log(Speia);*/
+
+			console.log(test);
+
+        }
+
+
+        let sliderform = document.getElementById('sliderform');
+
+        sliderform.addEventListener('reset',function(){
+        	//alert(sliderform);
+        	sliderform.reset();
+        	setTimeout(function(){
+        		editimage();
+
+        	},0);
+        })
+
+
+       /* document.getElementById("sliderform").addEventListener("reset", myFunction);
+
+		function myFunction() {
+		  alert('Reset');
+		}*/
+    </script>
+</body>
+
+</html>
