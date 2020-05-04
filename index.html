@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Image Edit</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -11,84 +11,129 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <style type="text/css">
-    	body{
-    		background-color: #376b88;
-    		font-family: 'Josefin Sans', sans-serif;
-    	}
-
+        body {
+            background-color: #376b88;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+        
+        #browseurl1,
+        #browseurl2 {
+            display: none;
+        }
+        
+        .chooseurl {
+            display: flex;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="mainheader">
-    	<div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-4" style="background-color:lavender;">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-lg-4" style="background-color:lavender;">
 
-                <h3 class="text-center my-5">Image Fileters</h3>
-                <form id="sliderform">
-                	<div class="d-flex justify-content-center">
-                    <div class="w-75">
-                        <p>Grayscale</p>
-                        <input type="range" class="custom-range" id="gs" min="" max="100" value="0">
-                    </div>
+                    <h3 class="text-center my-5">Image Fileters</h3>
+                    <form id="sliderform">
+                        <div class="d-flex justify-content-center">
+                            <div class="w-75">
+                                <p>Grayscale</p>
+                                <input type="range" class="custom-range" id="gs" min="" max="100" value="0">
+                            </div>
 
-                    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <div class="w-75">
-                        <p>Blur</p>
-                        <input type="range" class="custom-range" id="bl" min="" max="100" value="0">
-                    </div>
-                    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <div class="w-75">
-                        <p>Hue-Rotate</p>
-                        <input type="range" class="custom-range" id="hr" min="" max="100" value="0">
-                    </div>
-                    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <div class="w-75">
-                        <p>Speia</p>
-                        <input type="range" class="custom-range" id="speia" min="" max="100" value="0">
-                    </div>
-                    <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
-                </div>
-                
-
-                <div class="text-center mt-4">
-                	<button type="reset" class="btn btn-dark">Reset</button>
-                </div>
-
-                </form>
-
-            </div>
-
-            <div class="col-lg-8" style="background-color:lavenderblush;">
-                <form id="myform">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <div class="form-group w-100">
-                            <input type="text" class="form-control mt-3" placeholder="imageURL" id="onlineurl">
+                            <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
                         </div>
-                        <button type="submit" class="btn btn-dark mx-4">imageURL</button>
 
+                        <div class="d-flex justify-content-center">
+                            <div class="w-75">
+                                <p>Blur</p>
+                                <input type="range" class="custom-range" id="bl" min="" max="100" value="0">
+                            </div>
+                            <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="w-75">
+                                <p>Hue-Rotate</p>
+                                <input type="range" class="custom-range" id="hr" min="" max="100" value="0">
+                            </div>
+                            <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="w-75">
+                                <p>Speia</p>
+                                <input type="range" class="custom-range" id="speia" min="" max="100" value="0">
+                            </div>
+                            <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="reset" class="btn btn-dark">Reset</button>
+                        </div>
+
+                    </form>
+
+                    <div class="custom-control custom-switch my-4 mx-4">
+                        <input type="checkbox" class="custom-control-input" id="switch1" onclick="myFunction()">
+                        <label class="custom-control-label" for="switch1">Click me to change input url </label>
                     </div>
-                </form>
-                <div class="" style="height: 80vh;background-color: #20709287;">
-                    <figure style="height: 80vh;">
-                        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/3947/663947-h" class="rounded" alt="Cinque Terre" style="height: 100%; width: 100%;padding: 30px;" id="targetimage">
-                    </figure>
+
+                </div>
+
+                <div class="col-lg-8" style="background-color:lavenderblush;">
+                    <form id="myform">
+                        <div class="d-flex justify-content-center align-items-center">
+
+                            <div class="form-group w-100" id="browseurl1">
+                                <input type="text" class="form-control mt-3" placeholder="imageURL" id="onlineurl">
+                            </div>
+
+                            <div class="custom-file my-3" id="chooseurl">
+                                <input type="file" class="custom-file-input" id="onlineurl" onchange="loadFile(event)">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark mx-4" id="browseurl2">imageURL</button>
+
+                        </div>
+                    </form>
+                    <div class="" style="height: 80vh;background-color: #20709287;">
+                        <figure style="height: 80vh;">
+                            <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/3947/663947-h" class="rounded" alt="Cinque Terre" style="height: 100%; width: 100%;padding: 30px;" id="targetimage">
+                        </figure>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
+    <script type="text/javascript">
+        function myFunction() {
+            // Get the checkbox
+            let switchbtn = document.getElementById('switch1');
+
+            // If the checkbox is checked, display the output text
+            if (switchbtn.checked == true) {
+                //console.log('Checked');
+                document.getElementById("browseurl1").style.display = "flex";
+                document.getElementById("browseurl2").style.display = "flex";
+                document.getElementById("chooseurl").style.display = "none";
+            } else {
+                //console.log('Not Checked');
+                document.getElementById("browseurl1").style.display = "none";
+                document.getElementById("browseurl2").style.display = "none";
+                document.getElementById("chooseurl").style.display = "flex";
+            }
+        }
+
+        var loadFile = function(event) {
+            var image = document.getElementById('targetimage');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            //console.log(image);
+        };
+    </script>
 
     <script type="text/javascript">
         let myform = document.getElementById('myform');
@@ -97,11 +142,10 @@
 
         myform.addEventListener('submit', function(e) {
             let urlimage = document.getElementById('onlineurl');
-            let urlimageval = urlimage.value;         
-            
-            if(urlimageval.length)
-            {
-            	targetimage.setAttribute('src', urlimageval);
+            let urlimageval = urlimage.value;
+
+            if (urlimageval.length) {
+                targetimage.setAttribute('src', urlimageval);
             }
             urlimage.value = '';
             e.preventDefault();
@@ -109,54 +153,50 @@
             console.log(urlimageval);
         });
 
-        for(let i=0;i<inputrange.length;i++)
-        {
-        	inputrange[i].addEventListener('input',editimage)
+        for (let i = 0; i < inputrange.length; i++) {
+            inputrange[i].addEventListener('input', editimage)
         }
 
-        function editimage(){
-        	let gs = document.getElementById('gs');
-        	let bl = document.getElementById('bl');
-        	let hr = document.getElementById('hr');
-        	let sp = document.getElementById('sp');
+        function editimage() {
+            let gs = document.getElementById('gs');
+            let bl = document.getElementById('bl');
+            let hr = document.getElementById('hr');
+            let sp = document.getElementById('sp');
 
+            let Grayscale = gs.value;
+            let Blur = bl.value;
+            let Huerotate = hr.value;
+            let Speia = speia.value;
 
-        	let Grayscale =  gs.value;
-			let Blur = bl.value;
-			let Huerotate = hr.value;
-			let Speia = speia.value;
+            targetimage.style.filter = 'grayscale(' + Grayscale + '%) blur(' + Blur + 'px) hue-rotate(' + Huerotate + 'deg) sepia(' + Speia + '%)';
 
-			targetimage.style.filter = 'grayscale('+Grayscale+'%) blur('+Blur+'px) hue-rotate('+Huerotate+'deg) sepia('+Speia+'%)';
+            let test = 'grayscale(' + Grayscale + '%) blur(' + Blur + 'px) hue-rotate(' + Huerotate + 'deg) sepia(' + Speia + '%)';
 
-			let test = 'grayscale('+Grayscale+'%) blur('+Blur+'px) hue-rotate('+Huerotate+'deg) sepia('+Speia+'%)';
+            /*console.log(Grayscale);
+            console.log(Blur);
+            console.log(Huerotate);
+            console.log(Speia);*/
 
-			/*console.log(Grayscale);
-			console.log(Blur);
-			console.log(Huerotate);
-			console.log(Speia);*/
-
-			console.log(test);
+            console.log(test);
 
         }
-
 
         let sliderform = document.getElementById('sliderform');
 
-        sliderform.addEventListener('reset',function(){
-        	//alert(sliderform);
-        	sliderform.reset();
-        	setTimeout(function(){
-        		editimage();
+        sliderform.addEventListener('reset', function() {
+            //alert(sliderform);
+            sliderform.reset();
+            setTimeout(function() {
+                editimage();
 
-        	},0);
+            }, 0);
         })
 
+        /* document.getElementById("sliderform").addEventListener("reset", myFunction);
 
-       /* document.getElementById("sliderform").addEventListener("reset", myFunction);
-
-		function myFunction() {
-		  alert('Reset');
-		}*/
+        function myFunction() {
+          alert('Reset');
+        }*/
     </script>
 </body>
 
